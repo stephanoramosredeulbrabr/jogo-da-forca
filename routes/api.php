@@ -14,16 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//rotas abertas
-Route::group(['middleware' => 'guest:api'],function(){
-    Route::post('/login','API\LoginController@login');      
-});
-
-//rotas admin
-Route::group(['middleware' => 'auth:api'], function(){
-    Route::get('/logout','API\LoginController@logout');
-});
-
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
