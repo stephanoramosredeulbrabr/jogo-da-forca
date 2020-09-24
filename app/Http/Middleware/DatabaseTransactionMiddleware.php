@@ -6,7 +6,8 @@ use Closure;
 use DB;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response;
+use Throwable;
 
 /**
  * Class DatabaseTransactionMiddleware
@@ -15,11 +16,10 @@ use Illuminate\Http\Response;
 class DatabaseTransactionMiddleware
 {
     /**
-     * Handle an incoming request.
-     *
      * @param Request $request
      * @param Closure $next
      * @return mixed
+     * @throws Throwable
      */
     public function handle(Request $request, Closure $next)
     {
@@ -36,6 +36,5 @@ class DatabaseTransactionMiddleware
         $response instanceof Response && $response->isSuccessful() ? DB::commit() : DB::rollBack();
 
         return $response;
-
     }
 }
