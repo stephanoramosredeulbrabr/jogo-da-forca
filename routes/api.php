@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\WordController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,12 +16,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::resource('category', CategoryController::class)->only('index');
+Route::resource('word', WordController::class)->only('index');
+
+Route::prefix('category/{category}')->group(function () {
+    Route::get('word', [CategoryController::class, 'indexWord']);
 });
 
-Route::resource('category', CategoryController::class)->only('index');
-
 Route::middleware('auth:api')->group(function () {
-    Route::resource('category', CategoryController::class)->except('index');
+    Route::get('user', fn(Request $request) => $request->user());
+
+    Route::resource('category', CategoryController::class)->except('index', 'create', 'edit');
+    Route::resource('word', WordController::class)->except('index', 'store', 'create', 'edit');
+
+    Route::prefix('category/{category}')->group(function () {
+        Route::post('word', [CategoryController::class, 'storeWord']);
+    });
 });

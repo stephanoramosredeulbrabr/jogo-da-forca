@@ -4,13 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * Class Category
+ * Class Word
  * @package App\Models
  */
-class Category extends Model
+class Word extends Model
 {
     use HasFactory;
 
@@ -22,10 +22,10 @@ class Category extends Model
     ];
 
     /**
-     * @return HasMany
+     * @return BelongsTo
      */
-    public function words(): HasMany
+    public function category(): BelongsTo
     {
-        return $this->hasMany(Word::class);
+        return $this->belongsTo(Category::class);
     }
 }

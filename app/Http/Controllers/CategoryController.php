@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryStoreRequest;
 use App\Http\Requests\CategoryUpdateRequest;
+use App\Http\Requests\WordStoreRequest;
 use App\Http\Resources\CategoryResource;
+use App\Http\Resources\WordResource;
 use App\Models\Category;
+use App\Models\Word;
 use Exception;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
@@ -63,5 +66,28 @@ class CategoryController extends Controller
         $category->delete();
 
         return new CategoryResource($category);
+    }
+
+    /**
+     * @param Category $category
+     * @return AnonymousResourceCollection
+     */
+    public function indexWord(Category $category): AnonymousResourceCollection
+    {
+        return WordResource::collection($category->words()->get());
+    }
+
+    /**
+     * @param WordStoreRequest $request
+     * @param Category $category
+     * @return WordResource
+     */
+    public function storeWord(WordStoreRequest $request, Category $category): WordResource
+    {
+        $word = new Word($request->all());
+        $word->category()->associate($category);
+        $word->save();
+
+        return new WordResource($word);
     }
 }
