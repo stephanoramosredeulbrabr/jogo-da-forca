@@ -2,15 +2,15 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Category;
+use App\Models\Question;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 /**
- * Class CategoryUpdateRequest
+ * Class QuestionUpdateRequest
  * @package App\Http\Requests
  */
-class CategoryUpdateRequest extends FormRequest
+class QuestionUpdateRequest extends FormRequest
 {
     /**
      * @return bool
@@ -30,7 +30,7 @@ class CategoryUpdateRequest extends FormRequest
                 'sometimes',
                 'string',
                 'max:255',
-                Rule::unique(Category::class)->ignore($this->route('category')),
+                Rule::unique(Question::class)->ignore($this->route('question')),
             ]
         ];
     }

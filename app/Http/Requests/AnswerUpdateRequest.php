@@ -2,15 +2,13 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Category;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 /**
- * Class CategoryUpdateRequest
+ * Class AnswerUpdateRequest
  * @package App\Http\Requests
  */
-class CategoryUpdateRequest extends FormRequest
+class AnswerUpdateRequest extends FormRequest
 {
     /**
      * @return bool
@@ -26,12 +24,8 @@ class CategoryUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => [
-                'sometimes',
-                'string',
-                'max:255',
-                Rule::unique(Category::class)->ignore($this->route('category')),
-            ]
+            'answer' => ['sometimes', 'string', 'max:255'],
+            'correct' => ['sometimes', 'boolean'],
         ];
     }
 }

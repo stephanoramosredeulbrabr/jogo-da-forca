@@ -29,7 +29,6 @@ class WordUpdateRequest extends FormRequest
             'name' => [
                 'sometimes',
                 'string',
-                'nullable',
                 'max:255',
                 Rule::unique(Word::class)->ignore($this->route('word')),
             ]
