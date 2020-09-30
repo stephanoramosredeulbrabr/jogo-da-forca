@@ -31,20 +31,20 @@ Route::prefix('question/{question}')->group(function () {
     Route::get('answer', [QuestionController::class, 'indexAnswer']);
 });
 
-//Route::middleware('auth:api')->group(function () {
-Route::get('user', fn(Request $request) => $request->user());
+Route::middleware('auth:api')->group(function () {
+    Route::get('user', fn(Request $request) => $request->user());
 
-Route::resource('category', CategoryController::class)->except('index', 'create', 'edit');
-Route::resource('word', WordController::class)->except('index', 'store', 'create', 'edit');
+    Route::resource('category', CategoryController::class)->except('index', 'create', 'edit');
+    Route::resource('word', WordController::class)->except('index', 'store', 'create', 'edit');
 
-Route::resource('question', QuestionController::class)->except('index', 'create', 'edit');
-Route::resource('answer', AnswerController::class)->except('index', 'store', 'create', 'edit');
+    Route::resource('question', QuestionController::class)->except('index', 'create', 'edit');
+    Route::resource('answer', AnswerController::class)->except('index', 'store', 'create', 'edit');
 
-Route::prefix('category/{category}')->group(function () {
-    Route::post('word', [CategoryController::class, 'storeWord']);
+    Route::prefix('category/{category}')->group(function () {
+        Route::post('word', [CategoryController::class, 'storeWord']);
+    });
+
+    Route::prefix('question/{question}')->group(function () {
+        Route::post('answer', [QuestionController::class, 'storeAnswer']);
+    });
 });
-
-Route::prefix('question/{question}')->group(function () {
-    Route::post('answer', [QuestionController::class, 'storeAnswer']);
-});
-//});
