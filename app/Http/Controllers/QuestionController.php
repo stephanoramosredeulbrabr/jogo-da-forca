@@ -74,7 +74,7 @@ class QuestionController extends Controller
      */
     public function indexAnswer(Question $question): AnonymousResourceCollection
     {
-        return AnswerResource::collection($question->answers()->get());
+        return AnswerResource::collection($question->answers()->orderBy('id')->get());
     }
 
     /**
