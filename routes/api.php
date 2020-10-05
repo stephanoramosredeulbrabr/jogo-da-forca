@@ -4,6 +4,7 @@ use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\WordController;
+use App\Http\Controllers\RankingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,7 @@ Route::resource('category', CategoryController::class)->only('index');
 Route::resource('word', WordController::class)->only('index');
 Route::resource('question', QuestionController::class)->only('index');
 Route::resource('answer', AnswerController::class)->only('index');
+Route::resource('ranking', RankingController::class)->only(['index','store']);
 
 Route::prefix('category/{category}')->group(function () {
     Route::get('word', [CategoryController::class, 'indexWord']);
