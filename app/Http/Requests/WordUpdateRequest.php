@@ -28,6 +28,7 @@ class WordUpdateRequest extends FormRequest
         return [
             'name' => [
                 'sometimes',
+                'alpha',
                 'string',
                 'max:255',
                 Rule::unique(Word::class)->ignore($this->route('word')),
