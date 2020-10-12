@@ -78,6 +78,22 @@ class CategoryController extends Controller
     }
 
     /**
+     * @param $id_category
+     * @return WordResource
+     */
+
+    public function getWord($id_category = 0){
+        if($id_category){
+            $word = Category::find($id_category)->words()->selectRaw('id, name as size')->inRandomOrder()->first();
+        }else{
+            $word = Word::selectRaw('id, name as size')->inRandomOrder()->first();
+        }
+        $word->size = mb_strlen($word->size);
+        return new WordResource($word);
+
+    }
+
+    /**
      * @param WordStoreRequest $request
      * @param Category $category
      * @return WordResource
