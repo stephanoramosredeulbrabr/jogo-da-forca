@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AnswerUpdateRequest;
 use App\Http\Resources\AnswerResource;
 use App\Models\Answer;
+use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
@@ -54,4 +55,15 @@ class AnswerController extends Controller
 
         return new AnswerResource($answer);
     }
+
+    /**
+     * @param Request $request
+     */
+
+    public function checkAnswer(Request $request){
+        $id = $request->get('id');
+        $answer = Answer::find($id)->correct;
+        return json_encode($answer);
+    }
+    
 }

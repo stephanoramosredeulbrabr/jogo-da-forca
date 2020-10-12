@@ -90,4 +90,10 @@ class QuestionController extends Controller
 
         return new AnswerResource($word);
     }
+
+    public function getQuestion(){
+        $question['question'] = Question::inRandomOrder()->first();
+        $question['answers']  = AnswerResource::collection($question['question']->answers()->select('id','answer')->inRandomOrder()->get());
+        return $question;
+    }
 }

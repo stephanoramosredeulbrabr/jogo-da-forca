@@ -36,8 +36,9 @@ Route::prefix('question/{question}')->group(function () {
 Route::prefix('game')->group(function () {
     Route::post('letter', [WordController::class, 'findLetter']);
     Route::get('word/{category?}', [CategoryController::class, 'getWord']);
+    Route::get('question', [QuestionController::class, 'getQuestion']);
+    Route::post('question/answer', [AnswerController::class, 'checkAnswer']);
 });
-
 
 Route::middleware('auth:api')->group(function () {
     Route::get('user', fn(Request $request) => $request->user());
