@@ -20,7 +20,7 @@ class WordController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
-        return WordResource::collection(Word::all());
+        return WordResource::collection(Word::with('category')->get());
     }
 
     /**
