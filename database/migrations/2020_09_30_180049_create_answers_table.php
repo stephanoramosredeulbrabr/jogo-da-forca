@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Question;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,7 +18,8 @@ class CreateAnswersTable extends Migration
             $table->id();
             $table->string('answer');
             $table->boolean('correct')->default(false);
-            $table->foreignIdFor(Question::class);
+            $table->unsignedBigInteger('question_id');
+            $table->foreign('question_id')->references('id')->on('questions')->cascadeOnDelete();
             $table->timestamps();
         });
     }
