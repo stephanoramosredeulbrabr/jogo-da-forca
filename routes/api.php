@@ -34,6 +34,7 @@ Route::prefix('question/{question}')->group(function () {
 });
 
 Route::prefix('game')->group(function () {
+    Route::get('category', [CategoryController::class, 'indexOnlyWithWords']);
     Route::post('letter', [WordController::class, 'findLetter']);
     Route::get('word/{category?}', [CategoryController::class, 'getWord']);
     Route::get('question', [QuestionController::class, 'getQuestion']);

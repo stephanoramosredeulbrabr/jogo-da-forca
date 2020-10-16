@@ -27,6 +27,14 @@ class CategoryController extends Controller
     }
 
     /**
+     * @return AnonymousResourceCollection
+     */
+    public function indexOnlyWithWords(): AnonymousResourceCollection
+    {
+        return CategoryResource::collection(Category::query()->whereHas('words')->get());
+    }
+
+    /**
      * @param CategoryStoreRequest $request
      * @return CategoryResource
      */
