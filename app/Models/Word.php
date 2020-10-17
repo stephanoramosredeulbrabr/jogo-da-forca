@@ -22,6 +22,11 @@ class Word extends Model
     ];
 
     /**
+     * @var string[]
+     */
+    protected $with = ['category'];
+
+    /**
      * @return BelongsTo
      */
     public function category(): BelongsTo

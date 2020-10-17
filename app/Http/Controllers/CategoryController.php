@@ -111,7 +111,6 @@ class CategoryController extends Controller
         $word = new Word($request->all());
         $word->category()->associate($category);
         $word->save();
-        $word->load('category');
 
         return new WordResource($word);
     }
