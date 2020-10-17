@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\WordUpdateRequest;
 use App\Http\Resources\WordResource;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Word;
 use Exception;
@@ -40,6 +41,7 @@ class WordController extends Controller
     public function update(WordUpdateRequest $request, Word $word): WordResource
     {
         $word->update($request->all());
+        $word->category()->associate(Category::query()->find('category_id'));
 
         return new WordResource($word);
     }
