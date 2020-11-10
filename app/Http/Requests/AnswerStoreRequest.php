@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 /**
  * Class AnswerStoreRequest
@@ -24,7 +25,7 @@ class AnswerStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'answer' => ['required', 'string', 'max:255'],
+            'answer' => ['required', 'string', 'max:255',Rule::unique('answers','answer')->where('question_id',$this->question->id)],
             'correct' => ['sometimes', 'boolean'],
         ];
     }
