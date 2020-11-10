@@ -26,7 +26,7 @@ class WordStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'alpha', 'string', 'max:255', Rule::unique(Word::class)]
+            'name' => ['required', 'alpha', 'string','min:2', 'max:255', Rule::unique(Word::class)]
         ];
     }
 }
